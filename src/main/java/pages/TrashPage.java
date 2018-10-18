@@ -1,24 +1,21 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.Collection;
 
-
-public class SpamPage extends AbstractPage {
-
-    public static final String SPAM_URL="https://e.mail.ru/messages/spam/";
+public class TrashPage extends AbstractPage{
+    public static final String TRASH_URL ="https://e.mail.ru/messages/trash/";
     public static final String AUTHOR_NAME="Maryia Sidaruk";
 
-    public SpamPage(WebDriver driver) {
+    public TrashPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver,this);
     }
-    public boolean findMailInSpam(String adress,String subject,String text) {
+
+    public boolean findMailInTrash(String adress, String subject, String text){
         Collection<WebElement> draftList = driver.findElements(By.xpath("//div[@class='b-datalist__item__info']"));
         if (!draftList.isEmpty()){
             for (WebElement element : draftList) {
@@ -27,14 +24,15 @@ public class SpamPage extends AbstractPage {
                     element.click();
                     return true;
                 }
+                System.out.println(element.findElement(By.xpath("//div[@class='b-datalist__item__subj']")).getText());
+                System.out.println(element.findElement(By.xpath("//div[@class='b-datalist__item__addr']")).getText());
             }
         }
         return false;
-
     }
 
 
     public void openPage() {
-        driver.navigate().to(SPAM_URL);
+        driver.navigate().to(TRASH_URL);
     }
 }

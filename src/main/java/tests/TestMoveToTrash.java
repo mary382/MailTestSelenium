@@ -3,14 +3,14 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import steps.Steps;
 
-public class TestMoveMessageToSpam {
+public class TestMoveToTrash {
 
     private WebDriver driver;
-
     private Steps steps;
     private final String USERNAME = "maryia.sidaruk@mail.ru";
     private final String PASSWORD = "masha878363";
@@ -37,14 +37,14 @@ public class TestMoveMessageToSpam {
     }
 
     @Test(dependsOnMethods = "createNewMailAndSaveInDraft")
-    public void testIsMailInSpam(){
-    steps.sendMailAndGoToSends();
-    Assert.assertTrue(steps.isMailPresentedInSpam(ADRESS,SUBJECT,BODY));
+    public void testIsMainInTrash(){
+    steps.sendMailAndGoToTrash();
+    Assert.assertTrue(steps.isMailPresentedInTrash(ADRESS,SUBJECT,BODY));
     steps.logOff();
     }
 
     @AfterClass
-    public void stopBrowser() {
+    public void closeBrowser(){
         steps.closeDriver();
     }
 

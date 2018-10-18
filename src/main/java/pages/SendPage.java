@@ -24,9 +24,17 @@ public class SendPage extends AbstractPage {
     @FindBy(css = "//div[@class='b-datalist__item__subj']")
     private WebElement selectMail;
 
-    @FindBy(xpath = "//span[@class='b-toolbar__btn__text b-toolbar__btn__text_pad'][text()='Спам']")
+    @FindBy(css = "div.b-toolbar__btn.b-toolbar__btn_.b-toolbar__btn_grouped_last")
     private WebElement moveMailToSpamButton;
 
+    @FindBy(xpath = "//a[@class='js-href b-datalist__item__link']")
+    private WebElement openMail;
+
+    @FindBy(xpath = "//div[@data-name = 'remove']")
+    private WebElement deleteButton;
+
+    @FindBy(xpath = "//div[@class = 'b-checkbox__box']")
+    private WebElement checkBoxForMail;
 
     public SendPage sentItemsClick() {
         sentItems.click();
@@ -38,11 +46,25 @@ public class SendPage extends AbstractPage {
         return this;
     }
 
+    public SendPage clickDeleteButton(){
+        deleteButton.click();
+        return this;
+    }
+
+    public SendPage clickCheckBoxForMail(){
+        checkBoxForMail.click();
+        return this;
+    }
+
     public SendPage clickMoveToSpamButton(){
         moveMailToSpamButton.click();
         return this;
     }
 
+    public SendPage openMail(){
+        openMail.click();
+        return this;
+    }
 
     public boolean verifySentFolder(String addresseeMail, String subject, String text) {
         Collection<WebElement> sentList = driver.findElements(By.xpath("//div[@class='b-datalist__item__info']"));
@@ -63,21 +85,5 @@ public class SendPage extends AbstractPage {
 
     public void openPage() {
       driver.navigate().to(SEND_URL);
-    }
-
-
-
-    public boolean finderMail(String addresseeMail, String subject){
-        Collection<WebElement> inboxList = driver.findElements(By.xpath("//div[@data-bem='b-datalist__item']"));
-        if (!inboxList.isEmpty()){
-            for (WebElement element : inboxList) {
-                System.out.println(element.findElement(By.xpath("//div[@class='b-datalist__item__subj']")).getText().equalsIgnoreCase(subject));
-                if ((element.findElement(By.xpath("//div[@class='b-datalist__item__subj']")).getText().equalsIgnoreCase(subject))
-                        && (element.findElement(By.xpath("//div[@class='b-datalist__item__addr")).getText().equalsIgnoreCase(addresseeMail))) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

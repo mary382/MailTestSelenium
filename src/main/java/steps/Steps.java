@@ -37,8 +37,6 @@ public class Steps {
         mailPage.saveButtonClick();
 
 
-
-
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -64,30 +62,33 @@ public class Steps {
         return sendPage.verifySentFolder(adress, subject, text);
    }
 
-   public void checkSends(String adress, String subject){
-        SendPage sendPage=new SendPage(driver);
-        sendPage.finderMail(adress,subject);
-   }
-
    public void sendMailAndGoToSends(){
        sendMail();
        SendPage sendPage=new SendPage(driver);
        sendPage.openPage();
-      // sendPage.clickSelectMailButton();
-       driver.findElement(By.id("//a[@class='js-href b-datalist__item__link']")).click();
-       //sendPage.clickMoveToSpamButton();
-       driver.findElement(By.id("//span[@class='b-toolbar__btn__text b-toolbar__btn__text_pad'][text()='Спам']")).click();
-
-
+       sendPage.openMail();
+        sendPage.clickMoveToSpamButton();
    }
-
-
-
 
    public boolean isMailPresentedInSpam(String adress, String subject, String text){
        SpamPage spamPage=new SpamPage(driver);
        spamPage.openPage();
        return spamPage.findMailInSpam(adress,subject,text);
+   }
+
+   public void sendMailAndGoToTrash(){
+        sendMail();
+        SendPage sendPage=new SendPage(driver);
+        sendPage.openPage();
+        sendPage.clickCheckBoxForMail();
+        sendPage.clickDeleteButton();
+
+   }
+
+   public boolean isMailPresentedInTrash(String adress, String subject, String text){
+        TrashPage trashPage=new TrashPage(driver);
+        trashPage.openPage();
+        return trashPage.findMailInTrash(adress, subject, text);
    }
 
    public void logOff(){
