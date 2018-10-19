@@ -5,11 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.Collection;
-import java.util.Iterator;
 
 public class SendPage extends AbstractPage {
 
@@ -20,9 +16,6 @@ public class SendPage extends AbstractPage {
 
     @FindBy(xpath = "//div[@class='b-datalist__item__info']")
     private WebElement waitFor;
-
-    @FindBy(css = "//div[@class='b-datalist__item__subj']")
-    private WebElement selectMail;
 
     @FindBy(css = "div.b-toolbar__btn.b-toolbar__btn_.b-toolbar__btn_grouped_last")
     private WebElement moveMailToSpamButton;
@@ -41,11 +34,6 @@ public class SendPage extends AbstractPage {
         return this;
     }
 
-    public SendPage clickSelectMailButton(){
-        selectMail.click();
-        return this;
-    }
-
     public SendPage clickDeleteButton(){
         deleteButton.click();
         return this;
@@ -53,16 +41,6 @@ public class SendPage extends AbstractPage {
 
     public SendPage clickCheckBoxForMail(){
         checkBoxForMail.click();
-        return this;
-    }
-
-    public SendPage clickMoveToSpamButton(){
-        moveMailToSpamButton.click();
-        return this;
-    }
-
-    public SendPage openMail(){
-        openMail.click();
         return this;
     }
 

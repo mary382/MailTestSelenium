@@ -27,7 +27,6 @@ public class Steps {
         return loginPage.homePageStatus(username);
     }
 
-
     public void createNewMail(String adress,String subject, String text) {
         MailPage mailPage = new MailPage(driver);
         mailPage.writeNewMailButton();
@@ -38,13 +37,13 @@ public class Steps {
 
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean isMailPresentedInDraft(String adress,String subject,String text) {
+    public boolean saveMailToDraft(String adress, String subject, String text) {
         DraftPage draft_page = new DraftPage(driver);
         draft_page.openPage();
        return  draft_page.findMailInDraft(adress,subject,text);
@@ -55,7 +54,7 @@ public class Steps {
         draftPage.sendButtonClick();
    }
 
-   public boolean isMailPresentedInSend(String adress, String subject, String text){
+   public boolean moveMailFromDraftToSend(String adress, String subject, String text){
         SendPage sendPage=new SendPage(driver);
         sendPage.openPage();
         sendPage.sentItemsClick();
@@ -66,11 +65,12 @@ public class Steps {
        sendMail();
        SendPage sendPage=new SendPage(driver);
        sendPage.openPage();
-       sendPage.openMail();
-        sendPage.clickMoveToSpamButton();
+      // sendPage.openMail();
+       sendPage.dragNDropMailToSpam(MailPage.MAIL_LOCATOR,MailPage.SPAM_LOCATOR);
+      //  sendPage.clickMoveToSpamButton();
    }
 
-   public boolean isMailPresentedInSpam(String adress, String subject, String text){
+   public boolean moveMailFromDraftToSpam(String adress, String subject, String text){
        SpamPage spamPage=new SpamPage(driver);
        spamPage.openPage();
        return spamPage.findMailInSpam(adress,subject,text);
@@ -85,7 +85,7 @@ public class Steps {
 
    }
 
-   public boolean isMailPresentedInTrash(String adress, String subject, String text){
+   public boolean moveMailFromDraftToTrash(String adress, String subject, String text){
         TrashPage trashPage=new TrashPage(driver);
         trashPage.openPage();
         return trashPage.findMailInTrash(adress, subject, text);

@@ -31,7 +31,6 @@ public class TrashPage extends AbstractPage{
         return false;
     }
 
-
     public void openPage() {
         driver.navigate().to(TRASH_URL);
     }

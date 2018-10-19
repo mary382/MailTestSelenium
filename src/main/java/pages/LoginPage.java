@@ -38,8 +38,10 @@ public class LoginPage extends AbstractPage {
         inputLogin.sendKeys(username);
         inputPassword.sendKeys(password);
         buttonSubmit.click();
+
+
         try {
-            Thread.sleep(20000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,6 +52,4 @@ public class LoginPage extends AbstractPage {
         linkloggedInUser =wait.until(ExpectedConditions.visibilityOf(linkloggedInUser));
         return username.equals(linkloggedInUser.getText());
     }
-
-
 }

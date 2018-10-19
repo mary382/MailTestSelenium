@@ -33,13 +33,13 @@ public class TestMoveMessageToSpam {
     @Test(dependsOnMethods = "loginMail")
     public void createNewMailAndSaveInDraft() {
         steps.createNewMail(ADRESS, SUBJECT, BODY);
-        Assert.assertTrue(steps.isMailPresentedInDraft(ADRESS,SUBJECT,BODY));
+        Assert.assertTrue(steps.saveMailToDraft(ADRESS,SUBJECT,BODY));
     }
 
     @Test(dependsOnMethods = "createNewMailAndSaveInDraft")
     public void testIsMailInSpam(){
     steps.sendMailAndGoToSends();
-    Assert.assertTrue(steps.isMailPresentedInSpam(ADRESS,SUBJECT,BODY));
+    Assert.assertTrue(steps.moveMailFromDraftToSpam(ADRESS,SUBJECT,BODY));
     steps.logOff();
     }
 
@@ -47,5 +47,4 @@ public class TestMoveMessageToSpam {
     public void stopBrowser() {
         steps.closeDriver();
     }
-
 }

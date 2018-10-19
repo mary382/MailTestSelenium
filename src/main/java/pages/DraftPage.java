@@ -1,5 +1,4 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,9 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.Collection;
-import java.util.Iterator;
 
 public class DraftPage extends AbstractPage {
 
@@ -26,7 +23,6 @@ public class DraftPage extends AbstractPage {
 
     @FindBy(xpath = "//a[@data-id = '950']")
     private WebElement relocateToSpamButton;
-
 
     public DraftPage(WebDriver driver) {
         super(driver);
@@ -57,32 +53,7 @@ public class DraftPage extends AbstractPage {
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-name='send']")));
         WebElement sendButton = driver.findElement(By.xpath("//div[@data-name='send']"));
         sendButton.click();
+      //  screenshoter.onTestFailure();
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='message-sent__title']")));
     }
-
-    public DraftPage clickOnMailCheckBox()
-    {
-        checkBoxForMail.click();
-        return this;
-    }
-
-    public DraftPage clickRelocateButton() {
-
-        waitForElementClickable(By.xpath("//div[@class = 'b-toolbar__item']//span[text() = 'Переместить']"));
-        relocateButton.click();
-        return this;
-    }
-
-    public DraftPage clickRelocateToSpamButton()
-    {
-        waitForElementClickable(By.xpath("//a[@data-id = '950']"));
-        relocateToSpamButton.click();
-        return this;
-    }
-
-    public void clickMail(){
-        mailCheckbox.click();
-    }
-
-
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class MailPage extends AbstractPage {
 
 private static final String MAIL_URL="https://e.mail.ru/messages/inbox/?back=1";
+    public static final By MAIL_LOCATOR = By.xpath("//*[@id='b-letters']//a[@data-subject='TEST']");
+    public static final By SPAM_LOCATOR = By.xpath("//span[@class='b-nav__item__text'][text()='Спам']");
 
     @FindBy(xpath ="//*[@id='b-toolbar__left']/div/div/div[2]/div/a" )
     private WebElement writeNewMailButton;
@@ -57,13 +60,8 @@ private static final String MAIL_URL="https://e.mail.ru/messages/inbox/?back=1";
         return this;
     }
 
-
     public void clickLogOff(){
         logOff.click();
-    }
-
-    public void writeMailButtonClick()  {
-        writeNewMailButton.click();
     }
 
     public void fillAdressField(String  adress)  {
